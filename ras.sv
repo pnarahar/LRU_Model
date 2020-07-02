@@ -14,7 +14,7 @@ module ras
 localparam DEPTH = (2**ASIZE);
 logic [(DEPTH-1):0] [(PC_WIDTH-1):0] ras_stack;
 logic [ASIZE-1:0] tosp,tospplus1;
-logic [ASIZE:0]   ras_coutner;
+logic [ASIZE:0]   ras_counter;
 logic full;
 //Use this when empty, May help in recursive calls, No Guarrantees
 assign ret_addr = ras_stack[tosp];

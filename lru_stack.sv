@@ -46,7 +46,7 @@ for(i=0;i<=(DEPTH-1);i=i+1)
    end		
 end
   
-assign update_sloc[0]=update_lru_stack;;
+assign update_sloc[0]=update_lru_stack;
 
 always_comb begin
      for(int p=1;i<=(DEPTH-1);p=i+1)
