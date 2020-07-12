@@ -38,7 +38,7 @@ generate
        for(k=0;k<NUM_REQ;k++)
            for(l=0;l<NUM_REQ;l++)
               if(k!=l)
-                 assign higher_prior_req[k] = req[l] & pri[l][k];  
+                 assign higher_prior_req[k] = |(req[l] & pri[l][k]);  
 endgenerate
 
 
