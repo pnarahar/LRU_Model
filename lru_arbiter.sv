@@ -23,7 +23,7 @@ generate
               if(~rst_b) 
                  pri[i][j] <= 1'b1;
               else
-                 pri[i][j] <= pri[i][j] & ~gnt[j];
+                 pri[i][j] <= pri[i][j] & ~gnt[i];
             end
           end
           else if(i==j) begin
