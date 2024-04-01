@@ -16,7 +16,7 @@ module
 logic [NB : 0] tbl [DEPTH-1:0];
 logic [DEPTH-1 : 0] tbl_hit;
 logic [$clog2(DEPTH)-1:0]un_paired_idx,wr_pnt;
-
+logic [2:0] tbl_cnt [DEPTH-1:0];
 localparam THRSH = 5;
 
 logic [$clog2(THRSH)-1 : 0] strm_cnt;
@@ -92,7 +92,7 @@ generate
 for(genvar i=0;i<DEPTH;i++)
     always@(posedge clk or negedge rst_b) begin
         if(!rst_b)
-            tbl_cnt[i] <= 1'b0;
+            tbl_cnt[i] <= '0;
         else if(ready)
              tbl_cnt[i]<='0;
 // IF table hit or writing the key for the first time, increment the counter       
