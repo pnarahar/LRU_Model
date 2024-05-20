@@ -18,6 +18,7 @@ int count = 0;
 int capacity = 0;
 std::unordered_map<int, DLL*> m;
 
+//Removing a node or silent invalidations the count value is decremented, No need of eviction in that case.
 void remove_node(DLL* node) {
     if (node == nullptr) {
         std::cerr << "Error: Attempting to remove a null node" << std::endl;
@@ -27,8 +28,17 @@ void remove_node(DLL* node) {
     DLL* post = node->post;
     prev->post = post;
     post->prev = prev;
-    delete node;
+
+    // Decrement the count only if the node is valid (not already removed)
+    if (m.find(node->key) != m.end()) {
+        delete node;
+        count--;
+    }
+
+    // Remove the entry from the map
+    m.erase(node->key);
 }
+
 
 void add_node(DLL* node) {
     if (node == nullptr) {

@@ -21,19 +21,21 @@ public:
     }
 
     int get(int input) {
-        auto it = cache.find(input);
-        if (it != cache.end()) {
-            std::cout << "Cache hit for input " << input << ": " << cache[input].first << std::endl;
-            std::chrono::duration<double> accessTime = std::chrono::steady_clock::now() - cache[input].second;
-            totalAccessTimeHits += accessTime.count();
-            numHits++;
-            return cache[input].first;
-        }
-        std::cout << "Cache miss for input " << input << std::endl;
-        numMisses++;
-        return -1; // Cache miss
+    auto it = cache.find(input);
+    auto startTime = std::chrono::steady_clock::now(); // Capture start time
+    if (it != cache.end()) {
+        std::cout << "Cache hit for input " << input << ": " << cache[input].first << std::endl;
+        std::chrono::duration<double> accessTime = std::chrono::steady_clock::now() - startTime; // Calculate access time
+        totalAccessTimeHits += accessTime.count();
+        numHits++;
+        return cache[input].first;
     }
-
+    std::cout << "Cache miss for input " << input << std::endl;
+    std::chrono::duration<double> accessTime = std::chrono::steady_clock::now() - startTime; // Calculate access time
+    totalAccessTimeMisses += accessTime.count(); // Update total access time for misses
+    numMisses++;
+    return -1; // Cache miss
+}
     void put(int input, int result) {
         if (cache.size() >= capacity) {
             // Evict the least recently used element
